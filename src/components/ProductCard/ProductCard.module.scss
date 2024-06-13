@@ -1,0 +1,73 @@
+@font-face {
+    font-family: 'TTCommons';
+    src: url('/app/fonts/TTCommons-Medium.ttf') format('truetype');
+    font-weight: medium;
+    font-style: medium;
+}
+
+.product {
+    width: 300px;
+    height: 410px;
+    background-color: #fff;
+    border: 1px solid rgba($color: #000000, $alpha: 0.1);
+    display: flex;
+    flex-direction: column;
+    margin: 3rem;
+}
+
+.product_clickable_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 222px;
+    margin: 1.5rem;
+}
+
+.product_image {
+    width: 220px;
+    height: 222px;
+}
+
+.priceAndCart {
+    font-family: 'TTCommons', sans-serif;
+    color: #000000;
+    font-weight: 600;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.addToCartButton {
+    height: 40px;
+    width: 40px;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid rgba($color: #6B59CC, $alpha: 1.0);
+    transition: 0.3s;
+    
+
+    .addToCartButton_image {
+        height: 24px;
+        width: 24px;
+    }
+}
+
+.addToCartButton:hover {
+    background-color: #6B59CC;
+}
+
+.product_title {
+    text-decoration: none;
+    color: #000000;
+    transition: color 0.3s;
+}
+
+.product_title:hover {
+    color: rgba($color: #6B59CC, $alpha: 0.8);
+}
+
+.product_infotmation {
+    margin: 10px;    
+}

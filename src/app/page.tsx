@@ -1,8 +1,14 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Catalog from "@/components/Catalog";
+import "./globals.css";
+import { Banner } from "@/components/Banner/Banner";
+
 
 export default function Home() {
   return (
-    <div>ПРИВЕТ</div>
+    <div>
+      <Banner />
+      <Catalog />
+    </div>
+      
   );
 }

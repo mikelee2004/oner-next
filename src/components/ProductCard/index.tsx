@@ -1,26 +1,30 @@
 "use client"
 
-
 import Link from "next/link"
-import styles from "./product.module.scss"
+import styles from "./ProductCard.module.scss"
 import Image from "next/image"
-import { useState } from "react"
-import CartIcon from "../../../public/icons/cart.png"
+import { useCallback, useState } from "react"
 import HoveredCartIcon from "../../../public/icons/hoveredCart.png"
 import { Product } from "@/types/product"
+import CartIcon from "../../../public/cart.png"
+import { addToCart } from "@/hooks/addToCart"
 
 interface ProductCardProps {
-    product: Product
+    product: Product;
 }
 
-export default function ProductCard({product}: ProductCardProps) {
+export default function ProductCard({ product } : ProductCardProps) {
+
+    const handleAddToCart = useCallback(async () => {
+        await addToCart(product.id, 1, product.price, product.name, product.image);
+      }, [product]);
 
     const [isHovered, setIsHovered] = useState(false)
 
     const handleMouseEnter = () => {
         setIsHovered(true)
-    }
-
+      }
+  
     const handleMouseLeave = () => {
         setIsHovered(false)
     }
@@ -30,24 +34,32 @@ export default function ProductCard({product}: ProductCardProps) {
     }
 
     return (
-        <div className={styles.product} key={product.id}>
-            <Link href='#' className={styles.product_link}>
+        <div className={styles.product}>
+            <Link 
+                href="/src/app/products/[id]"
+                as={`/src/app/products/${product.id}`} >
                 <div className={styles.product_clickable_image}>
                     <Image 
-                        src={product.image}
-                        alt="product-image"
+                        src={product.image.includes('http') ? product.image : `/assets/${product.image}`}
+                        alt="product"
+                        height={222}
+                        width={220}
                         className={styles.product_image} 
                         />
                 </div>
             </Link>
             <Link href="/" className={styles.product_title}>
                 <div className={styles.product_information}>
-                    {product.name}
+                    <span>{product.name}</span>
                 </div>
             </Link>
             <div  className={`${styles.priceAndCart} ${isHovered ? styles.expanded : ''}`}>
-                <div className={styles.price}>{product.price}</div>
-                <button className={`${styles.addToCartButton} ${isHovered ? 'hovered' : ''}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                <span className={styles.price}>{product.price} ₽</span>
+                <button 
+                    onClick={handleAddToCart}
+                    className={`${styles.addToCartButton} ${isHovered ? 'hovered' : ''}`} 
+                    onMouseEnter={handleMouseEnter} 
+                    onMouseLeave={handleMouseLeave}>
                     <Image src={isHovered ? HoveredCartIcon : CartIcon} alt=";" className={styles.addToCartButton_image}></Image>
                 </button>
             </div>

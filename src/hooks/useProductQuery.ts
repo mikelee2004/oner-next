@@ -3,7 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchProducts } from '../services/fetch';
 
-const useCardsQuery = () => {
+
+const useProductQuery = () => {
     return useQuery({
         queryFn: fetchProducts,
         queryKey: ['product'],
@@ -11,4 +12,4 @@ const useCardsQuery = () => {
     });
 };
 
-export { useCardsQuery };  
+export { useProductQuery };  
